@@ -1,0 +1,12 @@
+library(tidyverse)
+UK <- read.csv("~/Documents/GitHub/CBIO/UK.csv")
+UK <- UK %>% filter(Entity == "United Kingdom")
+UK$month <- substr(UK$Day,6,7)
+UK$year <- substr(UK$Day,1,4)
+UK$day <- substr(UK$Day,9,10)
+UK <- UK %>% filter(year== 2021)
+UK <- UK %>% filter(month != "01")
+UK$week <-seq(from = 0, to = 32, by = 2)
+UK$Delta <- UK$Delta/100
+UK <- UK %>% as_tibble()
+write.table(UK,"Ukdata1.csv",sep=",", row.names = FALSE)
